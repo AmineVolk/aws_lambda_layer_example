@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  lambdaUseLayer:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdaUseLayer/
+      Handler: index.lambdaHandler
+      FunctionName: lambdaUseLayer
+      Runtime: nodejs8.10
+      Layers:
+        - !Ref mathOperatorLayer
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        Whoami:
+          Type: Api
+          Properties:
+            Path: /test/{operation}
+            Method: post
+  mathOperatorLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: mathOperatorLayer
+      Description: create mathOperator layers
+      ContentUri: mathOperatorLayer/
+      CompatibleRuntimes:
+        - nodejs8.10
+      RetentionPolicy: Retain

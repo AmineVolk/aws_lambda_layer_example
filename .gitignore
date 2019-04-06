@@ -1,0 +1,8 @@
+node_modules
+!mathOperatorLayer/nodejs/node_modules/mathOperator/*
+
+
+
+lambdaUseLayer/\.DS_Store
+
+\.DS_Store
